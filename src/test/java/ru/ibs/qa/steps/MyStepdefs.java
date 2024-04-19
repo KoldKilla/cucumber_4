@@ -7,6 +7,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import pages.ConfProp;
@@ -16,52 +17,44 @@ import pages.TablePage;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
 public class MyStepdefs {
-    WebDriver driver;
+    private static WebDriver driver;
 
     @io.cucumber.java.Before
-    public void настраиваемОкружениеВБраузере() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+    public void настраиваемОкружениеВБраузере() throws Exception{
+        System.setProperty ("REMOTE", "true");
 
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        String browser = System.getProperty ("type.browser");
+        String browserVersion = System.getProperty ("version.browser");
 
-        if ("remote".equalsIgnoreCase(ConfProp.getProperty("type_driver"))) {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(ConfProp.getProperty("type_browser"));
-            capabilities.setVersion("109.0");
-            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+        if (Boolean.parseBoolean (System.getProperty ("REMOTE"))) {
+            DesiredCapabilities capabilities = new DesiredCapabilities ();
+            capabilities.setCapability ("browserName", browser);
+            capabilities.setCapability ("browserVersion", browserVersion);
+            capabilities.setCapability ("selenoid:options", Map.<String, Object>of (
                     "enableVNC", true,
                     "enableVideo", false
             ));
-            try {
-                driver = new RemoteWebDriver(URI.create(ConfProp.getProperty("selenoid_url")).toURL(),
-                        capabilities, true);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-            driver.manage().window().maximize();
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            MainPage.setDriver(driver);
-            driver.get(ConfProp.getProperty("remote_url"));
+            driver = new RemoteWebDriver(
+                    new URL("http://149.154.71.152:4444/wd/hub"),
+                    capabilities
 
+
+            );
         } else {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            MainPage.setDriver(driver);
-            driver.get(ConfProp.getProperty("base_url"));
-        }
+            System.setProperty ("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+            driver = new ChromeDriver ();
 
+        }
+        driver.manage ().timeouts ().implicitlyWait (10, TimeUnit.SECONDS);
+        driver.manage ().window ().maximize ();
+        driver.get ("http://149.154.71.152:8080/");
     }
 
     @io.cucumber.java.After
@@ -144,4 +137,3 @@ public class MyStepdefs {
                 .checkTable("Наименование", "Тип", "Экзотический");
     }
 }
-
