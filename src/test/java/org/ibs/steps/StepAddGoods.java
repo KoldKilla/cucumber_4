@@ -111,7 +111,7 @@ public class StepAddGoods {
 
 
         List<String> listExoticFruit = Arrays.asList(
-                "5", "Test2", "Фрукт", "false");
+                "5", "Test3", "Фрукт", "false");
 
 
         List<WebElement> lastRowInTableOfGoods =  driverManager.getDriver().findElements(By.xpath(
@@ -134,7 +134,7 @@ public class StepAddGoods {
 
 
         List<String> listExoticFruit = Arrays.asList(
-                "5", "Test3", "Овощ", "true");
+                "5", "Test2", "Овощ", "true");
 
 
         List<WebElement> lastRowInTableOfGoods =  driverManager.getDriver().findElements(By.xpath(
