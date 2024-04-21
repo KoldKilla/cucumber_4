@@ -89,7 +89,7 @@ public class StepAddGoods {
 
 
         List<String> listExoticFruit = Arrays.asList(
-                "5", "Папайя", "Фрукт", "true");
+                "5", "Test", "Фрукт", "true");
 
         List<WebElement> lastRowInTableOfGoods =  driverManager.getDriver().findElements(By.xpath(
                 "//tr[5]/*"));
@@ -111,7 +111,7 @@ public class StepAddGoods {
 
 
         List<String> listExoticFruit = Arrays.asList(
-                "5", "Банан", "Фрукт", "false");
+                "5", "Test2", "Фрукт", "false");
 
 
         List<WebElement> lastRowInTableOfGoods =  driverManager.getDriver().findElements(By.xpath(
@@ -134,7 +134,7 @@ public class StepAddGoods {
 
 
         List<String> listExoticFruit = Arrays.asList(
-                "5", "Кивано", "Овощ", "true");
+                "5", "Test3", "Овощ", "true");
 
 
         List<WebElement> lastRowInTableOfGoods =  driverManager.getDriver().findElements(By.xpath(
@@ -157,7 +157,7 @@ public class StepAddGoods {
 
 
         List<String> listExoticFruit = Arrays.asList(
-                "5", "Огурец", "Овощ", "false");
+                "5", "Test4", "Овощ", "false");
 
 
         List<WebElement> lastRowInTableOfGoods =  driverManager.getDriver().findElements(By.xpath(
