@@ -84,6 +84,8 @@ public class StepAddGoods {
 
     }
 
+    
+
     @Тогда("Проверяем, что в последней строке таблицы Товары отображаются введенные данные экзотического фрукта")
     public void assertResultExoticFruit() {
 
