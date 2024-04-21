@@ -1,6 +1,8 @@
 #language: en
 
 @all
+@features
+
 Feature: Добавление товаров
 
   Background: Я нахожусь на главной странице сайта
