@@ -1,5 +1,6 @@
 # language: ru
 
+@ui
 @all
 @features
 Функция: Добавление товаров
