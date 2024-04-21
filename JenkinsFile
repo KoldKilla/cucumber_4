@@ -1,6 +1,6 @@
 node('unix') {
  stage('git') {
-  git branch: 'main', url: 'https://github.com/ElenaBairamova/jen'
+  git branch: 'main', url: 'https://github.com/KoldKilla/cucumber_4.git'
  }
     stage('Run tests') {
         withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'Default', mavenSettingsConfig: '', traceability: true) {
