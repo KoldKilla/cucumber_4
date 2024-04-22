@@ -1,7 +1,7 @@
 #language: en
 
 @all
-@features
+@cucumber
 
 Feature: Добавление товаров
 
